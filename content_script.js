@@ -1,5 +1,3 @@
-let JOBS_INFORMATION_FORMATTED = []
-
 const getJobsInformation = () => {
   const jobElementInformation = document.querySelectorAll('div[id*=jobcard-]')
   const jobElementInfomationArray = Array.from(jobElementInformation)
@@ -31,53 +29,19 @@ const getJobsInformation = () => {
   return jobJsonInformation
 }
 
-const summarizeJobInformation = () => {
-  const uniqueJobDate = [
-    ...new Set(JOBS_INFORMATION_FORMATTED.map((item) => item.jobDate)),
-  ]
+const portBackground = chrome.runtime.connect({
+  name: 'content_script-background',
+})
 
-  const jobsInfo = uniqueJobDate.map((date) => {
-    const jobsByDate = JOBS_INFORMATION_FORMATTED.filter(
-      (job) => job.jobDate === date
-    )
-
-    const uniqueJobSalaryRange = [
-      ...new Set(jobsByDate.map((item) => item.jobSalary)),
-    ]
-
-    const jobsSalaryRangeDetails = uniqueJobSalaryRange.map((salary) => {
-      const jobsDetails = jobsByDate.filter((job) => job.jobSalary === salary)
-
-      return {
-        salaryRange: salary,
-        jobsDetails,
-      }
-    })
-
-    return {
-      jobsDate: date,
-      jobsSalaryRange: jobsSalaryRangeDetails,
-    }
-  })
-
-  return jobsInfo
-}
+portBackground.postMessage({ cmd: 'online' })
 
 chrome.runtime.onConnect.addListener((port) => {
   port.onMessage.addListener(({ cmd }) => {
     if (cmd === 'scrap') {
-      console.log('Obtener información de esta página')
-      JOBS_INFORMATION_FORMATTED = JOBS_INFORMATION_FORMATTED.concat(
-        getJobsInformation()
-      )
-    }
-
-    if (cmd === 'show') {
-      console.log('JOBS_INFORMATION_FORMATTED: ', JOBS_INFORMATION_FORMATTED)
-      console.log('Mostrar información resumida')
-      const summaryInfo = summarizeJobInformation()
-      console.log('summaryInfo: ', summaryInfo)
-      port.postMessage({ message: summaryInfo })
+      const jobsInformation = getJobsInformation()
+      const buttonNext = document.querySelector('[class*=next]')
+      const nextPage = !buttonNext.className.includes('disabled')
+      portBackground.postMessage({ cmd: 'getInfo', jobsInformation, nextPage })
     }
   })
 })
