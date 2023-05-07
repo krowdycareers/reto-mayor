@@ -6,8 +6,9 @@ function addPageToURL(url) {
   const match = url.match(regex);
   const page = (match && match[1]) || "1";
   const newPage = parseInt(page) + 1;
+  return match ? url.replace(regex, `page=${newPage}`) : url+=`&page=${newPage}` ; 
 
-  return url.replace(regex, `page=${newPage}`);
+  
 }
 
 function unifiedJobs(filteredJobs) {
@@ -27,6 +28,7 @@ function unifiedJobs(filteredJobs) {
 }
 
 async function changeTabToNextPage(url, id) {
+  console.log("🚀 ~ file: background.js:30 ~ changeTabToNextPage ~ url:", url)
   const newUrl = addPageToURL(url);
   await chrome.tabs.update(id, { url: newUrl });
 }
