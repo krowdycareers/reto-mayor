@@ -1,8 +1,16 @@
 const btnScriptElement = document.getElementById('btn-script')
-const pMessageElement = document.getElementById('p-message')
+const messageElement = document.getElementById('message')
 
 btnScriptElement.addEventListener('click', async () => {
-  let port = chrome.runtime.connect({ name: 'popup-background' })
+  const port_PopupToBackground = chrome.runtime.connect({
+    name: 'popup-background',
+  })
 
-  port.postMessage({ cmd: 'start' })
+  port_PopupToBackground.postMessage({ cmd: 'start' })
+
+  port_PopupToBackground.onMessage.addListener(({ cmd, data }) => {
+    if (cmd === 'finish') {
+      messageElement.innerText = JSON.stringify(data)
+    }
+  })
 })
