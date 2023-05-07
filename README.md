@@ -1,2 +1,1 @@
-# reto-mayor
-Retro de scrapping bootcamp
+# Bootcamp retro de desguace
