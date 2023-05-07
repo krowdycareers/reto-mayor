@@ -40,6 +40,9 @@ chrome.runtime.onConnect.addListener(function (port) {
     port.onMessage.addListener(async function (params, sender) {
         const { cmd } = params;
         if (cmd == "start") {
+            await saveObjectInLocalStorage({
+                scrapingJobs: null,
+            });
             start = true;
             const [tab] = await chrome.tabs.query({
                 active: true,

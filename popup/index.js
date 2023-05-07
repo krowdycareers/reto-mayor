@@ -52,17 +52,16 @@ const pMessageElement = document.getElementById("message");
 
 btnScripting.addEventListener("click", async () => {
     var port = chrome.runtime.connect({ name: "popup-background" });
-    port.onMessage.addListener(function (params) {
-        const { cmd } = params;
-
-        if (cmd === "showInfo") {
-        }
-    });
     port.postMessage({ cmd: "start" });
-    chrome.storage.local.get("scrapingJobs", function ({ scrapingJobs }) {
-        scrapingJobs = JSON.parse(scrapingJobs) ?? [];
-        pMessageElement.innerHTML = generateTemplateToPrint(
-            groupJobsJSON(scrapingJobs)
-        );
-    });
+    setInterval(function () {
+        chrome.storage.local.get("scrapingJobs", function ({ scrapingJobs }) {
+            console.log(scrapingJobs);
+            if (scrapingJobs) {
+                scrapingJobs = JSON.parse(scrapingJobs);
+                pMessageElement.innerHTML = generateTemplateToPrint(
+                    groupJobsJSON(scrapingJobs)
+                );
+            }
+        });
+    }, 2000);
 });

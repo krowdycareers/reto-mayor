@@ -27,6 +27,9 @@ const portBackground = chrome.runtime.connect({
     name: "content_script-background",
 });
 portBackground.postMessage({ cmd: "online" });
+const portPopup = chrome.runtime.connect({
+    name: "content_script-Popup",
+});
 chrome.runtime.onConnect.addListener(function (port) {
     port.onMessage.addListener(function (params) {
         const { cmd } = params;
@@ -38,6 +41,12 @@ chrome.runtime.onConnect.addListener(function (port) {
                 cmd: "getInfo",
                 jobsInformation,
                 nextPage,
+            });
+        }
+        if (cmd === "sendInfo") {
+            console.log("send Info");
+            portPopup.postMessage({
+                cmd: "showInfo",
             });
         }
     });
