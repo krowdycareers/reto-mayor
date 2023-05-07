@@ -60,7 +60,7 @@ btnScripting.addEventListener("click", async () => {
     });
     port.postMessage({ cmd: "start" });
     chrome.storage.local.get("scrapingJobs", function ({ scrapingJobs }) {
-        scrapingJobs = JSON.parse(scrapingJobs);
+        scrapingJobs = JSON.parse(scrapingJobs) ?? [];
         pMessageElement.innerHTML = generateTemplateToPrint(
             groupJobsJSON(scrapingJobs)
         );

@@ -67,9 +67,6 @@ chrome.runtime.onConnect.addListener(function (port) {
         if (cmd === "getInfo") {
             let { jobsInformation, nextPage } = params;
             jobs = [...jobs, ...jobsInformation];
-            await saveObjectInLocalStorage({
-                scrapingJobs: JSON.stringify(jobs),
-            });
 
             if (nextPage) {
                 const {
@@ -79,6 +76,10 @@ chrome.runtime.onConnect.addListener(function (port) {
                 } = sender;
                 changeTabToNextPage(url, id);
             } else {
+                await saveObjectInLocalStorage({
+                    scrapingJobs: JSON.stringify(jobs),
+                });
+                jobs = [];
                 start = false;
             }
         }
