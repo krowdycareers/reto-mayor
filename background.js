@@ -1,4 +1,4 @@
-let jobs = [];
+let jobs = {};
 let start = false;
 
 function addPageToURL(url) {
@@ -8,6 +8,22 @@ function addPageToURL(url) {
   const newPage = parseInt(page) + 1;
 
   return url.replace(regex, `page=${newPage}`);
+}
+
+function unifiedJobs(filteredJobs) {
+  for (let key1 in filteredJobs) {
+    if (jobs.hasOwnProperty(key1)) {
+      for (let key2 in filteredJobs[key1]) {
+        if (jobs[key1].hasOwnProperty(key2)) {
+          jobs[key1][key2] += filteredJobs[key1][key2];
+        } else {
+          jobs[key1][key2] = filteredJobs[key1][key2];
+        }
+      }
+    } else {
+      jobs[key1] = filteredJobs[key1];
+    }
+  }
 }
 
 async function changeTabToNextPage(url, id) {
@@ -39,8 +55,8 @@ chrome.runtime.onConnect.addListener(function (port) {
       }
     }
     if (cmd === "getInfo") {
-      const { jobsInformation, pageNext } = params;
-      jobs = [...jobs, ...jobsInformation];
+      const { filteredJobs, pageNext } = params;
+      unifiedJobs(filteredJobs);
       if (pageNext) {
         const {
           sender: {
@@ -50,6 +66,9 @@ chrome.runtime.onConnect.addListener(function (port) {
         changeTabToNextPage(url, id);
       } else {
         start = false;
+        chrome.storage.session.set({ jobs: jobs }).then(() => {
+          console.log("Value is set to ", jobs);
+        });
       }
     }
   });

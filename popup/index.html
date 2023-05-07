@@ -1,16 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body style="height: 500px;" >
-    <p>Hola</p>
-    <button id="btncomunicacion">Enviar hola al contexto de la página</button>
+  </head>
+  <body
+    style="
+      width: 500px;
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: auto;
+    "
+  >
+    <h2>Web Scraping</h2>
 
-    <p id="mensajes"> Esperando mensaje... </p>
+    <p id="loading" style="display: none; margin: auto;">Procesando...</p>
+    <div id="scrapInfo" style="display: none; margin-bottom: 1rem"></div>
+
+    <button
+      id="btnComunicacion"
+      style="
+        margin-bottom: 27px;
+        margin-top: auto;
+        outline: 0;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        border-radius: 4px;
+        font-size: 13px;
+        height: 30px;
+        background-color: #083cae;
+        color: white;
+        padding: 0 20px;
+      "
+    >
+      Obtener estadísticas del día
+    </button>
+
     <script src="./index.js"></script>
-</body>
+  </body>
 </html>
