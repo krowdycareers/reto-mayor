@@ -1,0 +1,23 @@
+.wrapper {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.wrapper .buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 15px;
+  width: 85%;
+}
+#btnscript {
+  width: 85%;
+  margin-bottom: 10px;
+}
+hr {
+  width: 90%;
+  height: 1px;
+  background: rgba(122, 134, 196, 0.524);
+  margin-top: 15px;
+}
