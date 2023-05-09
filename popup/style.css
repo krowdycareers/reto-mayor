@@ -1,0 +1,93 @@
+body {
+  width: 450px;
+  height: auto;
+  padding: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+h4 {
+  font-size: 1.4rem;
+  opacity: 0.8;
+}
+
+h4::before {
+  content: attr(data-label);
+  font-weight: 400;
+}
+
+h5 {
+  font-size: 1.3rem;
+  color: #e65d3e;
+}
+
+h5::before {
+  content: attr(data-label) ': ';
+  font-weight: 400;
+  color: #0a0a0a;
+}
+
+p {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #e65d3e;
+}
+
+button {
+  padding: 4px 8px;
+  border: 1px solid #09a;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  color: rgb(255, 255, 255);
+  background-color: rgb(25, 118, 210);
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+}
+
+button:hover {
+  box-shadow: rgba(0, 0, 0, 0.44) 0px 2px 6px;
+  transform: scale(1.01);
+}
+button:active {
+  transform: scale(1);
+}
+
+table {
+  width: 90%;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+th {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  border: solid 1px rgb(28, 165, 180);
+  background: rgb(129, 195, 204);
+}
+
+td {
+  border: solid 1px rgb(28, 165, 180);
+  line-height: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+tr {
+  transition: all 0.25s;
+}
+
+tr:hover {
+  background: rgb(172, 214, 219);
+}
+
+button:disabled {
+  pointer-events: none;
+  opacity: 0.7;
+}
