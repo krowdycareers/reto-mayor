@@ -1,0 +1,32 @@
+{
+    "name": "scraping-occ",
+    "description": "Alertas",
+    "manifest_version": 3,
+    "version": "1.0",
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "storage",
+        "tabs"
+    ],
+    "background": {
+        "service_worker": "./background.js"
+    },
+    "action": {
+        "default_popup": "./popup/index.html"
+    },
+    "icons": {
+        "32": "./images/icon.png"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                
+                "https://www.occ.com.mx/empleos/trabajo-en-ingenieria/?tm=1"
+            ],
+            "js": [
+                "./contentScript.js"
+            ]
+        }
+    ]
+}
