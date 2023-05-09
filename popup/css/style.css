@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+  padding: 20px;
+  width: 300px;
+  min-height: 1000px;
+  background-color: #f2f2f2;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.2em;
+  line-height: 1.5;
+}
+
+a {
+  color: #0066cc;
+}
+
+.salaries {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.salary {
+  flex-basis: 60%;
+}
+
+.count {
+  flex-basis: 40%;
+  text-align: center;
+}
