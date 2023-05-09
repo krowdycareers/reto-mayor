@@ -21,19 +21,19 @@ chrome.runtime.onMessage.addListener(function ({ message, datos }) {
 let card = (d) => {
   return `<div class="card">
             <div class="card__title">Titulo : ${d.Titulo}</div>
-            <div class="card__categoria">Fecha : ${d.Fecha}</div>
-            <div class="card__categoria">Lugar : ${d.Lugar}</div>
+            <div class="card__fecha">Fecha : ${d.Fecha}</div>
+            <div class="card__lugar">Lugar : ${d.Lugar}</div>
             <div class="card__categoria">Categoria : ${d.Categoria}</div>
-            <div class="card__categoria">SubCategoria : ${d.Subcategoria}</div>
+            <div class="card__subcategoria">SubCategoria : ${d.Subcategoria}</div>
           </div>`;
 };
 
 function setDataInHTML(jobsSorted) {
-  const eleDiv = document.createElement("div");
+  const elementDiv = document.createElement("div");
 
-  
+  // Crea las filas de datos
 
-  let dinosaurio = `
+  let accordionHTML = `
     <div class="accordion accordion-flush" id="accordionFlushExample">
 
         ${jobsSorted
@@ -60,17 +60,15 @@ function setDataInHTML(jobsSorted) {
           .join(" ")}
       </div>`;
 
-  eleDiv.innerHTML = dinosaurio;
+  elementDiv.innerHTML = accordionHTML;
 
   pMessageElement.innerHTML = "";
-  pMessageElement.appendChild(eleDiv);
+  pMessageElement.appendChild(elementDiv);
 }
 
-//Funcion sorted
+
 function sortBySalary(jobList) {
-  
-  const arrayFiltrado = jobList.filter((elemento) => elemento !== null);
-  
+  const arrayFiltrado = jobList.filter((elemento) => elemento !== null);  
   let jobsInfoArray = arrayFiltrado.map((el) => {
     return el.Salario;
   });
@@ -108,7 +106,7 @@ function sortBySalary(jobList) {
   return resultJsonJobs;
 }
 
-
+//START LOCAL STORAGE
 function obtenerDatos() {
   const datos = JSON.parse(localStorage.getItem("datos")) || [];
   return datos;
@@ -120,4 +118,4 @@ function saveListJobs(nuevoDato) {
   datos.push(nuevoDato);
   localStorage.setItem("datos", JSON.stringify(datos));
 }
-
+//FIN LOCAL STORAGE
