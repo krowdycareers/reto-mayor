@@ -1,4 +1,4 @@
-/* const getJobsInformation = () => {
+const getJobsInformation = () => {
   const jobElementInformation = document.querySelectorAll('div[id*=jobcard-]')
   const jobElementInfomationArray = Array.from(jobElementInformation)
 
@@ -19,17 +19,17 @@
     ] = element.children
 
     return {
-      jobUrl,
-      jobDate: jobDate.split('\n')[0],
-      jobTitle,
-      jobSalary: jobSalary.split(' Mensual')[0],
+      // jobUrl,
+      jobDate: jobDate.trim().split('\n')[0],
+      jobTitle: jobTitle.trim(),
+      jobSalary: jobSalary.trim().split(' Mensual')[0],
     }
   })
 
   return jobJsonInformation
-} */
+}
 
-/* const portBackground = chrome.runtime.connect({
+let portBackground = chrome.runtime.connect({
   name: 'content_script-background',
 })
 
@@ -44,24 +44,4 @@ chrome.runtime.onConnect.addListener((port) => {
       portBackground.postMessage({ cmd: 'getInfo', jobsInformation, nextPage })
     }
   })
-}) */
-
-// const port_ContentScriptToBackground = chrome.runtime.connect({
-//   name: 'content_script-background',
-// })
-
-// port_ContentScriptToBackground.postMessage({ cmd: 'online' })
-
-chrome.runtime.onConnect.addListener((port) => {
-  if (port.name === 'background-content_script') {
-    port.onMessage.addListener(({ cmd }) => {
-      if (cmd === 'scrap') {
-        port.postMessage({
-          cmd: 'getInfo',
-          data: [{ name: 'test' }],
-          nextPage: true,
-        })
-      }
-    })
-  }
 })

@@ -1,0 +1,117 @@
+[
+  {
+    "jobsDate": "Hoy",
+    "jobsSalaryRange": [
+      {
+        "salaryRange": "Sueldo no mostrado por la empresa",
+        "jobsDetails": [
+          {
+            "jobDate": "Hoy",
+            "jobTitle": "Asesor Previsional Afore / Tijuana",
+            "jobSalary": "Sueldo no mostrado por la empresa"
+          },
+          {
+            "jobDate": "Hoy",
+            "jobTitle": "Asesor inmobiliario",
+            "jobSalary": "Sueldo no mostrado por la empresa"
+          }
+        ]
+      },
+      {
+        "salaryRange": "$12,000 - $13,000",
+        "jobsDetails": [
+          {
+            "jobDate": "Hoy",
+            "jobTitle": "Asesor",
+            "jobSalary": "$12,000 - $13,000"
+          }
+        ]
+      },
+      {
+        "salaryRange": "$10,700",
+        "jobsDetails": [
+          {
+            "jobDate": "Hoy",
+            "jobTitle": "Asesor empresarial",
+            "jobSalary": "$10,700"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "jobsDate": "Hace 1 día",
+    "jobsSalaryRange": [
+      {
+        "salaryRange": "$8,000 - $12,000",
+        "jobsDetails": [
+          {
+            "jobDate": "Hace 1 día",
+            "jobTitle": "Asesor de venta",
+            "jobSalary": "$8,000 - $12,000"
+          },
+          {
+            "jobDate": "Hace 1 día",
+            "jobTitle": "Asesor de venta",
+            "jobSalary": "$8,000 - $12,000"
+          },
+          {
+            "jobDate": "Hace 1 día",
+            "jobTitle": "Asesor de venta",
+            "jobSalary": "$8,000 - $12,000"
+          },
+          {
+            "jobDate": "Hace 1 día",
+            "jobTitle": "Asesor de venta",
+            "jobSalary": "$8,000 - $12,000"
+          }
+        ]
+      },
+      {
+        "salaryRange": "$6,500 - $7,500",
+        "jobsDetails": [
+          {
+            "jobDate": "Hace 1 día",
+            "jobTitle": "Asesor Refaccionista",
+            "jobSalary": "$6,500 - $7,500"
+          }
+        ]
+      },
+      {
+        "salaryRange": "$8,697 - $13,697",
+        "jobsDetails": [
+          {
+            "jobDate": "Hace 1 día",
+            "jobTitle": "Asesor en ruta",
+            "jobSalary": "$8,697 - $13,697"
+          }
+        ]
+      },
+      {
+        "salaryRange": "Sueldo no mostrado por la empresa",
+        "jobsDetails": [
+          {
+            "jobDate": "Hace 1 día",
+            "jobTitle": "Asesor de venta",
+            "jobSalary": "Sueldo no mostrado por la empresa"
+          },
+          {
+            "jobDate": "Hace 1 día",
+            "jobTitle": "Asesor Previsional Afore - Mexicali, BC",
+            "jobSalary": "Sueldo no mostrado por la empresa"
+          }
+        ]
+      },
+      {
+        "salaryRange": "$6,308",
+        "jobsDetails": [
+          {
+            "jobDate": "Hace 1 día",
+            "jobTitle": "Asesor de punto de venta",
+            "jobSalary": "$6,308"
+          }
+        ]
+      }
+    ]
+  }
+]
