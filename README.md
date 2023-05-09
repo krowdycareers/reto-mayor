@@ -1,2 +1,8 @@
 # reto-mayor
-Retro de scrapping bootcamp
+* background.js : Es el que se ejecuta en segundo plano en la extensión y se encarga de coordinar el trabajo de la extensión. El código define una constante para el nombre del puerto, que se utiliza para establecer la comunicación entre la extensión y la página web. La función principal es handleMessage, que se encarga de manejar los mensajes enviados desde la página web. Cuando se recibe el mensaje "start", se envía un mensaje a la página web para iniciar la recolección de datos. Cuando se recibe el mensaje "getInfo", se procesan los datos recolectados y se almacenan en la memoria local.
+
+* contentScript.js : Es el que se ejecuta en la página web y se encarga de recolectar la información sobre las ofertas de trabajo. El código define varias constantes y funciones para extraer información de la página web y para comunicarse con el código de background.js. El código se ejecuta cada vez que se carga una nueva página de la lista de ofertas de trabajo y envía un mensaje a background.js con la información recolectada.
+
+* popup/index.js : Es el que se ejecuta en la ventana emergente de la extensión. El código define una función para agrupar las ofertas de trabajo por ubicación y salario, y una función para mostrar las estadísticas en la ventana emergente. El código también define un botón para iniciar la recolección de datos y se comunica con background.js para iniciar el proceso.
+
+* 
