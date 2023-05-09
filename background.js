@@ -16,39 +16,7 @@ const changeTabToNextPage = async (url, tabId) => {
   await chrome.tabs.update(tabId, { url: newURL })
 }
 
-function formatJobInfo(jobs) {
-  // Crear un objeto para almacenar la información formateada
-  const formattedInfo = {}
-
-  // Iterar sobre cada objeto en el JSON
-  jobs.forEach((job) => {
-    // Obtener la fecha de los trabajos
-    const jobDate = job.jobsDate
-
-    // Crear un objeto para almacenar la información salarial
-    const salaryInfo = {}
-
-    // Iterar sobre cada objeto salaryRange
-    job.jobsSalaryRange.forEach((range) => {
-      // Obtener la descripción del rango salarial
-      const salaryRange = range.salaryRange
-
-      // Contar la cantidad de trabajos en este rango salarial
-      const jobCount = range.jobsDetails.length
-
-      // Agregar la información salarial al objeto salaryInfo
-      salaryInfo[salaryRange] = jobCount
-    })
-
-    // Agregar la información de salario formateada para la fecha dada
-    formattedInfo[jobDate] = salaryInfo
-  })
-
-  // Devolver el objeto con la información formateada
-  return formattedInfo
-}
-
-const summarizeJobInformation = (jobsToFormat) => {
+const setFormatToJobsInfo = (jobsToFormat) => {
   const uniqueJobDate = [...new Set(jobsToFormat.map((item) => item.jobDate))]
 
   const jobsInfo = uniqueJobDate.map((date) => {
@@ -73,9 +41,22 @@ const summarizeJobInformation = (jobsToFormat) => {
     }
   })
 
-  const jobsInfo2 = formatJobInfo(jobsInfo)
+  const jobsInfoFormatted = {}
 
-  return jobsInfo2
+  jobsInfo.forEach((job) => {
+    const jobDate = job.jobsDate
+    const salaryInfo = {}
+
+    job.jobsSalaryRange.forEach((range) => {
+      const salaryRange = range.salaryRange
+      const jobCount = range.jobsDetails.length
+      salaryInfo[salaryRange] = jobCount
+    })
+
+    jobsInfoFormatted[jobDate] = salaryInfo
+  })
+
+  return jobsInfoFormatted
 }
 
 chrome.runtime.onConnect.addListener((port) => {
@@ -124,7 +105,7 @@ chrome.runtime.onConnect.addListener((port) => {
         } else {
           start = false
 
-          const jobsInfoFormatted = summarizeJobInformation(jobs)
+          const jobsInfoFormatted = setFormatToJobsInfo(jobs)
 
           ports['popup-background'].postMessage({
             cmd: 'end',
