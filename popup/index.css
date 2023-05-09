@@ -1,0 +1,167 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  color: #000;
+}
+
+body {
+  min-width: 400px;
+  min-height: 550px;
+  background-color: #fff;
+  padding: 1rem;
+}
+
+/* CUSTOM SCROLL */
+::-webkit-scrollbar {
+  width: 2vw;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fa9427;
+}
+
+/* HEADER */
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+header > h1 {
+  color: #fa9427;
+  text-transform: uppercase;
+  font-size: 2rem;
+}
+
+header > div {
+  display: flex;
+  gap: 1rem;
+}
+
+/* BUTTON */
+
+header > div button {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid #252525;
+  background: #fff;
+  box-shadow: 3px 3px #252525;
+  cursor: pointer;
+  margin: 0 0 35px 0;
+}
+
+header > div button:active {
+  box-shadow: none;
+  transform: translate(3px, 3px);
+}
+
+/* LOADER */
+.loader {
+  background: #fa9427;
+  height: 10px;
+  width: 80px;
+  border-radius: 10px;
+  position: relative;
+  animation: loader5 2s ease-in-out infinite;
+  opacity: 0;
+  transition: 0.3s;
+  margin: auto;
+  margin-top: 4rem;
+}
+
+.loader::before,
+.loader::after {
+  content: "";
+  position: absolute;
+  height: 10px;
+  border-radius: 10px;
+  left: 20px;
+  animation: loader5 2s ease-in-out infinite;
+}
+
+.loader::before {
+  background: #fa9427a2;
+  top: 20px;
+  width: 50px;
+}
+
+.loader::after {
+  background: #fa942769;
+  top: -20px;
+  width: 60px;
+}
+
+@keyframes loader5 {
+  0% {
+    transform: translateX(30px) scale(1);
+  }
+
+  50% {
+    transform: translateX(-30px) scale(1.1);
+  }
+
+  100% {
+    transform: translateX(30px) scale(1);
+  }
+}
+
+/* CARD */
+#information-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.card {
+  width: 300px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.header {
+  background-color: #252525;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.body {
+  padding: 20px;
+}
+
+.body > h3 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.body > ul {
+  display: flex;
+  margin-top: 0.4rem;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.body > ul li {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
