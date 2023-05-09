@@ -14,24 +14,24 @@ chrome.runtime.onMessage.addListener(function ({ message, datos }) {
     let dataJobsSorted = sortBySalary(getSavedData.flat());
     console.log(dataJobsSorted);
     setDataInHTML(dataJobsSorted);
-    //  pMessageElement.innerText = JSON.stringify(dataJobsSorted, null, 3)
+    
   }
 });
 
 let card = (d) => {
   return `<div class="card">
-            <div class="card__title">title : ${d.Titulo}</div>
-            <div class="card__categoria">date : ${d.Fecha}</div>
-            <div class="card__categoria">salary : ${d.Lugar}</div>
-            <div class="card__categoria">salary : ${d.Categoria}</div>
-            <div class="card__categoria">lugar : ${d.SubCategoria}</div>
+            <div class="card__title">Titulo : ${d.Titulo}</div>
+            <div class="card__categoria">Fecha : ${d.Fecha}</div>
+            <div class="card__categoria">Lugar : ${d.Lugar}</div>
+            <div class="card__categoria">Categoria : ${d.Categoria}</div>
+            <div class="card__categoria">SubCategoria : ${d.Subcategoria}</div>
           </div>`;
 };
 
 function setDataInHTML(jobsSorted) {
   const eleDiv = document.createElement("div");
 
-  // Crea las filas de datos
+  
 
   let dinosaurio = `
     <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -62,17 +62,15 @@ function setDataInHTML(jobsSorted) {
 
   eleDiv.innerHTML = dinosaurio;
 
-  // Agrega la tabla al elemento contenedor en el HTML
-  // const contenedor = document.getElementById("contenedor");
   pMessageElement.innerHTML = "";
   pMessageElement.appendChild(eleDiv);
 }
 
 //Funcion sorted
 function sortBySalary(jobList) {
-  // console.log('Desde function',jobList);
+  
   const arrayFiltrado = jobList.filter((elemento) => elemento !== null);
-  // console.log('Desde function sin null',arrayFiltrado);
+  
   let jobsInfoArray = arrayFiltrado.map((el) => {
     return el.Salario;
   });
@@ -110,35 +108,16 @@ function sortBySalary(jobList) {
   return resultJsonJobs;
 }
 
-//Read
+
 function obtenerDatos() {
   const datos = JSON.parse(localStorage.getItem("datos")) || [];
   return datos;
 }
 
-//Create
+
 function saveListJobs(nuevoDato) {
   const datos = obtenerDatos();
   datos.push(nuevoDato);
   localStorage.setItem("datos", JSON.stringify(datos));
 }
-// //Update
-// function actualizarDato(indice, nuevoDato) {
-//   const datos = obtenerDatos();
-//   if (indice >= 0 && indice < datos.length) {
-//     datos[indice] = nuevoDato;
-//     localStorage.setItem('datos', JSON.stringify(datos));
-//     return true;
-//   }
-//   return false;
-// }
-// //Delete
-// function eliminarDato(indice) {
-//   const datos = obtenerDatos();
-//   if (indice >= 0 && indice < datos.length) {
-//     datos.splice(indice, 1);
-//     localStorage.setItem('datos', JSON.stringify(datos));
-//     return true;
-//   }
-//   return false;
-// }
+
