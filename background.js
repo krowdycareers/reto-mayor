@@ -103,14 +103,16 @@ chrome.runtime.onConnect.addListener((port) => {
           changeTabToNextPage(url, id)
           counter++
         } else {
-          start = false
-
           const jobsInfoFormatted = setFormatToJobsInfo(jobs)
 
           ports['popup-background'].postMessage({
             cmd: 'end',
             data: jobsInfoFormatted,
           })
+
+          start = false
+          jobs = []
+          counter = 0
         }
       }
     }
