@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrap</title>
+    <style>
+        body {
+          margin: 0;
+          padding: 2rem;
+          width: 360px;
+        }
+
+        .cntSearch {
+          display: flex;
+          align-items: center;
+        }
+
+        .cntJobs {
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+
+        .job-element {
+          background-color: #dbdbdb;
+          border: 1px solid #ddd;
+          padding: 10px;
+          margin-bottom: 20px;
+        }
+
+        .job-element:last-child {
+            margin-bottom: 20px;
+        }
+
+        .job-title {
+          font-size: 16px;
+          margin-top: 20px;
+        }
+
+        .job-city {
+          color: #999;
+          font-size: 14px;
+          margin: 5px 0;
+        }
+
+        .job-salary {
+          color: #53a704;
+          font-size: 14px;
+          margin: 5px 0;
+        }
+
+        .btn {
+          background-color: #14181d;
+          border-color: #151618;
+          color: #fff;
+          padding: 8px 16px;
+          border-radius: 4px;
+          font-size: 16px;
+          cursor: pointer;
+          margin: 0 auto;
+        }
+
+        .btn:hover {
+          background-color: #555657;
+          border-color: #494949;
+          color: #fff;
+        }
+
+        #jobs-list {
+            min-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Scrapping</h1>
+    <div class="cntSearch">
+        <button id="btnscript" class="btn">Ejecutar</button>
+    </div>
+    <div id="cntJobs">
+        <div id="jobs-list"></div>
+    </div>
+    <script src="./index.js"></script>
+</body>
+</html>
