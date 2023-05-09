@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;200&display=swap');
+
+* {
+    font-family: 'Hanken Grotesk', sans-serif;
+    margin: 0;
+}
+
+.main {
+    background: #083cae;
+    padding: 10px;
+}
+
+.title,
+.content-buttons {
+    text-align: center;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.button-info {
+    color: #ffffff;
+    border: 1px solid #f13465;
+    background: #f13465;
+    cursor: pointer;
+    height: 32px;
+    display: inline-block;
+    padding: 0 16px;
+    position: relative;
+    font-size: 13px;
+    max-width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    transition: 0.3s all;
+    font-weight: 600;
+    line-height: 24px;
+    user-select: none;
+    white-space: nowrap;
+    touch-action: manipulation;
+    border-radius: 6px;
+    margin-bottom: 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.cardGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.12),
+        0 1px 6px 0 rgba(0, 29, 124, 0.05);
+    background-color: #fff;
+}
+
+.titleCity {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.bodyInfo {
+    width: 100%;
+}
+
+.loader {
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+button {
+    margin-top: 2px;
+}
+
+body {
+    background: #f5f5f8;
+}
+
+h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+span {
+    font-size: 16px;
+    color: #333;
+}
