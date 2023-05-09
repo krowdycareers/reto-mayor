@@ -1,0 +1,31 @@
+{
+    "name": "Scraping-Challeng#1",
+    "description": "Get alerts - KrowdyCarrers",
+    "manifest_version": 3,
+    "version": "1.0",
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "tabs",
+        "storage"
+    ],
+    "background": {
+        "service_worker": "./background.js"
+    },
+    "action": {
+        "default_popup": "./popup/index.html"
+    },
+    "icons": {
+        "32": "./img/icon.png"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.occ.com.mx/*"
+            ],
+            "js": [
+                "./contentScript.js"
+            ]
+        }
+    ]
+}
