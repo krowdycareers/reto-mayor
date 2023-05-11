@@ -32,7 +32,20 @@ chrome.runtime.onConnect.addListener(function(port) {
             jobsBySalaryAndZone[zona][salario] = 1;
           }
         });
-        pMessageElement.textContent = JSON.stringify(jobsBySalaryAndZone, null, 2);
+        pMessageElement.textContent = "";//JSON.stringify(jobsBySalaryAndZone, null, 2);
+        Object.keys(jobsBySalaryAndZone).forEach((zona) => {
+          const zonaElement = document.createElement("h2");
+          zonaElement.textContent = zona;
+          pMessageElement.appendChild(zonaElement);
+        
+          const salarioElement = document.createElement("a");
+          const salarioString = Object.keys(jobsBySalaryAndZone[zona])
+            .map((salario) => `${salario}: ${jobsBySalaryAndZone[zona][salario]}`)
+            .join("\n");
+          salarioElement.textContent = salarioString;
+          pMessageElement.appendChild(salarioElement);
+        });
+        
       };
     });
   }
