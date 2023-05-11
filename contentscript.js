@@ -1,83 +1,81 @@
+// Obtiene la información de cada trabajo
 function getJobsInformation() {
-  const jobsCardElementns = [...document.querySelectorAll('div[id*=jobcard]')]
+  // Selecciona todos los elementos del DOM cuyo id contenga "jobcard"
+  const jobsCardElements = [...document.querySelectorAll('div[id*=jobcard]')];
 
-  return jobsCardElementns.map((jobCard) => {
-    const [
-      { href: url },
-      {
-        children: [
-          {
-            children: [
-              { innerText: fecha },
-              { innerText: title },
-              { innerText: salary }
-            ]
-          }
-        ]
-      }
-    ] = jobCard.children
+  // Mapea cada elemento del DOM para extraer la información del trabajo
+  return jobsCardElements.map((jobCard) => {
+    // Obtiene la información básica del trabajo (URL, fecha de publicación, título y salario)
+    const [{ href: url }, { children: [info] }] = jobCard.children;
+    const [fecha, title, salary] = info.children;
 
-    // uso ol atributo title porque las ubicaciones estan escritas sin abreviaciones, permitiendo como en mi caso que no conozco mexico mayor entendimiento.
+    // Obtiene la ubicación del trabajo (estado y ciudad)
+    const locationJobs = [...jobCard.querySelectorAll('a[title*=Empleos]')].reverse();
+    let [{ title: state } = { title: '' }, { title: city } = { title: '' }] = locationJobs;
+    state = state.slice(11);
+    city = city.slice(10);
 
-    const locationJobs = [
-      ...jobCard.querySelectorAll('a[title*=Empleos]')
-    ].reverse()
-    // dejo el city auque no lo utilice para en un futura poder usarlo para afinar mas la locacion.
-    let [{ title: state } = { title: '' }, { title: city } = { title: '' }] =
-      locationJobs
-    state = state.slice(11)
-    city = city.slice(10)
-
-    return { title, salary, location: state }
-  })
+    // Retorna un objeto con la información extraída del trabajo
+    return { title: title.innerText, salary: salary.innerText, location: state };
+  });
 }
 
+// Conecta con el background script
 const portBackground = chrome.runtime.connect({
   name: 'content_script-background'
-})
+});
 
-const element = document.querySelector('div[class*=jobCardContainer]')
-
-const getButtonNext = () => {
-  return document.querySelector('*[class*=next]')
+// Obtiene el botón de "Siguiente"
+function getNextButton() {
+  return document.querySelector('*[class*=next]');
 }
 
-let mutation = null
+let mutation = null;
+// Escucha la conexión con la extensión
 chrome.runtime.onConnect.addListener(function (port) {
+  // Escucha los mensajes que envía la extensión
   port.onMessage.addListener(({ cmd }) => {
     if (cmd === 'scrap') {
-      // detecta cambios en el container de trabajos para que cuando se cargue el boton se ejecute evento onClick, solo si no tiene disabled. De esta forma no se recarga la pagina completa, simulando el uso de usuario.
+      // Detecta cambios en el contenedor de trabajos para que cuando se cargue el botón se ejecute evento onClick, 
+      // sólo si no está desactivado. De esta forma no se recarga la página completa, simulando el uso de usuario.
       mutation = new MutationObserver(() => {
-        const buttonNext = getButtonNext()
-        if (buttonNext) {
-          const nextPage = buttonNext.className.includes('disabled')
+        // Obtiene el botón "Siguiente"
+        const nextButton = getNextButton();
 
-          if (nextPage === false) {
-            const jobsInformation = getJobsInformation()
-            portBackground.postMessage({
-              cmd: 'getInfo',
-              jobsInformation
-            })
-            buttonNext.click()
+        if (nextButton) {
+          // Verifica si el botón "Siguiente" está desactivado
+          const nextPage = nextButton.className.includes('disabled');
+
+          if (!nextPage) {
+            // Obtiene la información de los trabajos y envía el mensaje a la extensión
+            const jobsInformation = getJobsInformation();
+            portBackground.postMessage({ cmd: 'getInfo', jobsInformation });
+            
+            // Simula el click del botón "Siguiente"
+            nextButton.click();
           } else {
-            mutation && mutation.disconnect()
-            portBackground.postMessage({ cmd: 'sendLocalStorage' })
+            // Detiene la observación de mutaciones y envía el mensaje a la extensión para guardar la información en el almacenamiento local
+            mutation && mutation.disconnect();
+            portBackground.postMessage({ cmd: 'sendLocalStorage' });
           }
         }
-      })
+      });
 
-      mutation.observe(element, { subtree: true, childList: true })
+      // Observa los cambios en el contenedor de trabajos
+      mutation.observe(element, { subtree: true, childList: true });
 
-      const jobsInformation = getJobsInformation()
-      portBackground.postMessage({
-        cmd: 'getInfo',
-        jobsInformation
-      })
-      getButtonNext().click()
+      // Obtiene la información de los trabajos y envía el mensaje a la extensión
+      const jobsInformation = getJobsInformation();
+      portBackground.postMessage({ cmd: 'getInfo', jobsInformation });
+      
+      // Simula el click del botón "Siguiente"
+      getNextButton().click();
     }
+
     if (cmd === 'stop') {
-      mutation && mutation.disconnect()
-      portBackground.postMessage({ cmd: 'sendLocalStorage' })
+      // Detiene la observación de mutaciones y envía el mensaje a la extensión para guardar la información en el almacenamiento local
+      mutation && mutation.disconnect();
+      portBackground.postMessage({ cmd: 'sendLocalStorage' });
     }
-  })
-})
+  });
+});
