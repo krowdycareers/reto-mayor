@@ -1,0 +1,30 @@
+{
+  "name": "reto-mayor",
+  "version": "1.0.0",
+  "description": "Retro de scrapping bootcamp",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "dev": "ts-node-dev --respawn --transpile-only src/app",
+    "start": "node index.js",
+    "build": "tsc --outDir ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krowdycareers/reto-mayor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krowdycareers/reto-mayor/issues"
+  },
+  "homepage": "https://github.com/krowdycareers/reto-mayor#readme",
+  "dependencies": {
+    "puppeteer": "^20.1.2",
+    "puppeteer-core": "^20.1.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  }
+}
