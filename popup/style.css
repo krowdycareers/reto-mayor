@@ -1,0 +1,125 @@
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: #333;
+  background: #fff;
+  width: 15rem;
+  height: 22rem;
+  border: 2px solid #aaa;
+  position: relative;
+}
+
+.header {
+  width: 100%;
+  background: #3a80d1;
+  color: #fff;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+  line-height: 1.8;
+  font-size: 1.2rem;
+}
+
+.title-section {
+  width: 100%;
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 1rem 0.5rem 0rem 1rem;
+}
+
+/* CONTAINER MESSAGE */
+
+.container {
+  margin: 1rem auto;
+  width: 90%;
+  height: 12.5rem;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.container::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.container::-webkit-scrollbar:vertical {
+  border-radius: 22px;
+  width: 8px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: #cacaca;
+}
+
+.container::-webkit-scrollbar-thumb {
+  border-radius: 22px;
+  background: #3a81d1b0;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+  background: #3a81d1;
+}
+
+.container::-webkit-scrollbar-thumb:active {
+  background: #3a81d181;
+}
+
+/* TABLE */
+
+table {
+  font-size: 0.75rem;
+  text-align: left;
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #aaa;
+}
+
+thead {
+  position: sticky;
+  background: #3a80d1;
+  color: #fff;
+}
+
+th,
+td {
+  padding: 0.4rem 0.2rem;
+  border-left: 1px solid #ccc;
+}
+
+
+/* BTNS */
+
+.btn {
+  width: 45%;
+  padding: 0.5rem;
+  background: #3a80d1;
+  color: #fff;
+  border: none;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+section.btns {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+#btnstop {
+  background: #e04848;
+}
