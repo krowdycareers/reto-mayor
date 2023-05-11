@@ -1,5 +1,4 @@
 const btnScripting = document.getElementById("btnscript");
-const btnStop = document.getElementById("btnstop");
 
 const jobCard = document.getElementById("jobCard");
 
@@ -8,9 +7,11 @@ btnScripting.addEventListener("click", async () => {
   jobCard.textContent = "Procesando...";
   setTimeout(() => {
     jobCard.textContent = "";
-    var port = chrome.runtime.connect({ name: "popup-background" });
+    let port = chrome.runtime.connect({ name: "popup-background" });
     port.postMessage({ cmd: "start" });
   }, 3000);
+
+  btnScripting.innerText = "Next Page ➡️";
 });
 
 chrome.runtime.onMessage.addListener(function (params) {

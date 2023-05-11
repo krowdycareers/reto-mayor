@@ -36,7 +36,7 @@ chrome.runtime.onConnect.addListener(function (port) {
       const { jobsInformation, nextPage } = params;
       jobs = [...jobs, ...jobsInformation];
 
-      const jobsJSON = jobs;
+      const dataJobs = jobs;
 
       chrome.storage.local.set({ jobs }, () => {
         console.log("La data ha sido guardada", jobs);
@@ -48,9 +48,10 @@ chrome.runtime.onConnect.addListener(function (port) {
             tab: { url, id },
           },
         } = sender;
-        chrome.runtime.sendMessage({ cmd: "dataJobs", jobs: jobsJSON });
         changeTabToNextPage(url, id);
       }
+
+      chrome.runtime.sendMessage({ cmd: "dataJobs", jobs: dataJobs });
       start = false;
     }
   });
