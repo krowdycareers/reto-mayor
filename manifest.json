@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "jobs-scraping",
+  "author": "https://github.com/GersoZz",
+  "version": "1.0.0",
+  "description": "Scraping Jobs Offers",
+  "permissions": ["tabs", "storage", "activeTab", "scripting"],
+  "background": {
+    "service_worker": "./background.js"
+  },
+  "action": {
+    "default_popup": "./popup/index.html"
+  },
+  "icons": {
+    "32": "./images/occ.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.occ.com.mx/*"],
+      "js": ["./contentscript.js"]
+    }
+  ]
+}
