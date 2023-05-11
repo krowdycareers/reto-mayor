@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="../src/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    
+</head>
+<style>
+    *{
+        box-sizing: border-box;
+    }
+    body{
+        margin: 0;
+        padding: 0;           
+    }
+    .accordion-item:nth-child(even) {
+    background-color: #f1f1f1; /* Color para índices pares */
+    }
+
+    .accordion-item:nth-child(odd) {
+    background-color: #e1e1e1; /* Color para índices impares */
+    }
+    .card:hover{
+        background-color: rgb(161 158 158);
+    }
+</style>
+<body style="margin:0;padding:0;border:5px solid black;">
+    
+    <div style="padding: 5px;">
+        <p>Extraer datos segun rango de salarios</p>
+        <button class="btn btn-success" id="btnscript" style="padding: 5px;cursor: pointer;">Extraer</button>
+    </div>
+
+    <pre id="mensaje" style="font-size:14px;"></pre>
+    
+    <script src="./index.js"></script>
+    <script src="../src/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
