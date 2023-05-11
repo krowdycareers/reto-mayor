@@ -12,6 +12,8 @@
   </a>
 </p>
 
+!['img'](./img/img.PNG)
+
 > Proyecto de web scraping para obtencion de data por paginacion y antes de ello el filtrado.
 > Se filtra para el dia de "Hoy" luego se selecciona la informacion del rango de pago y asimismo la direccion, de todas las paginaciones
 
