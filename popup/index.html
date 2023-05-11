@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <p class="title">EXTENSION DE SCRAPING</p>
+    <div class="group__container">
+        <div class="input__container">
+            <label for="numberpages">Ingrese el numero de paginas</label>
+            <input id="numberpages" type="text" inputmode="numeric">
+            <div>
+                <input type="checkbox" name="" id="allpages">
+                <label for="allpages">Todas las paginas</label>
+            </div>
+        </div>
+        <div class="buttons__container">
+            <button id="btnscript">START</button>
+            <button id="btnstop">STOP</button>
+            <button id="btnreset">RESET</button>
+        </div>
+    </div>
+    <pre id="mensaje">No hay Resultados</pre>
+    <div class="result__container" id="result"></div>
+    <script src="./index.js"></script>
+</body>
+
+</html>
