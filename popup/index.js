@@ -3,12 +3,14 @@ const btnScripting = document.getElementById("btnscript");
 const pMessageElement = document.getElementById("mensaje");
 
 btnScripting.addEventListener("click", async () => {
-  var port = chrome.runtime.connect({ name: "popup-background" });
-  port.postMessage({ cmd: "start" });
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  var port = chrome.tabs.connect(tab.id,{ name: "popup-content_scripting" });
+  port.postMessage({ cmd: "scrap" , dataLimit: 3});
 });
 
 chrome.runtime.onMessage.addListener(function ({ message, datos }) {
   if (message == "getAccumJobs") {
+    console.log( datos);
     let saveInLocal = saveListJobs(datos);
     let getSavedData = obtenerDatos();
     let dataJobsSorted = sortBySalary(getSavedData.flat());
@@ -119,3 +121,14 @@ function saveListJobs(nuevoDato) {
   localStorage.setItem("datos", JSON.stringify(datos));
 }
 //FIN LOCAL STORAGE
+const accordionItems = document.querySelectorAll('.accordion-item');
+
+accordionItems.forEach((item, index) => {
+  if (index % 2 === 0) {
+    // Índice par
+    item.style.backgroundColor = '#f1f1f1'; // Color para índices pares
+  } else {
+    // Índice impar
+    item.style.backgroundColor = '#e1e1e1'; // Color para índices impares
+  }
+});

@@ -80,9 +80,12 @@ function getJobsInformation() {
 const portBackground = chrome.runtime.connect({
   name: "content_script-background",
 })
+portBackground.postMessage({ cmd:'online' })
+
+
 
 chrome.runtime.onConnect.addListener(async function (port) {
-  await port.onMessage.addListener(({ cmd }) => {
+  await port.onMessage.addListener(({ cmd , dataLimit}) => {
     if (cmd == "scrap") {
 
       let jobInfo = getJobsInformation()
@@ -92,7 +95,7 @@ chrome.runtime.onConnect.addListener(async function (port) {
         const buttonNext = document.querySelector('[class*=next]');
         const nextPage = !buttonNext.className.includes("disabled")
         
-        return portBackground.postMessage({cmd:'getInfo',jobsSorted, nextPage})
+        return portBackground.postMessage({cmd:'getInfo',jobsSorted, nextPage, dataLimit})
       })
       .catch((err)=>console.log(err))
 
@@ -103,3 +106,53 @@ chrome.runtime.onConnect.addListener(async function (port) {
 
 
 
+// function getJobInformation() {
+//   const elemCardJobs = [...document.querySelectorAll('[id*="jobcard-"]')];
+//   const jobs = elemCardJobs.map((cardJob) => {
+//       const [
+//           { href: url },
+//           {
+//               children: [
+//                   {
+//                       children: [
+//                           { innerText: fecha },
+//                           { innerText: title },
+//                           { innerText: salario },
+//                           { innerText: beneficios },
+//                           { },
+//                           {
+//                               children: [elementEmpresCiudad],
+//                           },
+//                       ],
+//                   },
+//               ],
+//           },
+//       ] = cardJob.children;
+
+//       const empresa = elementEmpresCiudad?.querySelector("label")?.innerText;
+//       const ciudad = elementEmpresCiudad?.querySelector("p")?.innerText;
+//       return { url, fecha, title, salario, beneficios, empresa, ciudad };
+//   });
+
+//   return jobs;
+// }
+
+// //Connect to background
+// const portBackground = chrome.runtime.connect({ name: "content-background" });
+
+
+// portBackground.postMessage({ cmd:'online' })
+
+// chrome.runtime.onConnect.addListener(function (port) {
+//   port.onMessage.addListener(async function ({ cmd , dataLimit}) {
+
+//       if (cmd == "scrap") {
+//           const jobsSorted = getJobInformation();
+//           const nextPageButton = document.querySelector("[class*=next-]");
+//           const nextPage = !nextPageButton.className.includes('disabled')
+//           //portBackground.postMessage({ message: "getInfo", jobsInformation, nextPage, dataLimit });
+//           portBackground.postMessage({cmd:'getInfo',jobsSorted, nextPage, dataLimit})
+//       }
+
+//   });
+// });
