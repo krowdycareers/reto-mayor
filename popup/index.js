@@ -1,73 +1,40 @@
-const btnStartElement = document.getElementById('btnStart')
-const smsElement = document.getElementById('sms')
+const btnStartElement = document.getElementById('btnStart');
+const messageElement = document.getElementById('message');
 
-// Función para crear la tabla con la información y mostrarla en el DOM
-const createTable = (data) => {
-  messageElement.textContent = ''
+btnStartElement.addEventListener("click", async () => {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  const port = chrome.tabs.connect(tab.id, { name: "popup" });
+  port.postMessage({ message: "getJobs" });
 
-  for (let date in data) {
-    let table = `
-      <table>
-        <thead>
-          <tr>
-            <th colspan="2">${date}</th>
-          </tr>
-          <tr>
-            <th>Rango salarial</th>
-            <th>Conteo</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${Object.keys(data[date])
-            .map(
-              (range) => `
-            <tr>
-              <td>${range}</td>
-              <td>${data[date][range]}</td>
-            </tr>
-          `
-            )
-            .join('')}
-        </tbody>
-      </table>
-    `
-    messageElement.insertAdjacentHTML('beforeend', table)
+  const { message, data } = await new Promise(resolve => {
+    chrome.runtime.onMessage.addListener(resolve);
+  });
+
+  if (message === "ok") {
+    const groupByLocation = groupBy(['location']);
+    const groupedData = groupByLocation(data);
+    console.log(JSON.stringify({ groupByLocation: groupedData }, null, 2));
+
+    displayData(groupedData);
   }
+});
+
+function groupBy(keys) {
+  return array =>
+    array.reduce((objectsByKeyValue, obj) => {
+      const value = keys.map(key => obj[key]).join('-');
+      objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
+      return objectsByKeyValue;
+    }, {});
 }
 
-// Conexión con el background
-const backgroundPort = chrome.runtime.connect({ name: 'popup-background' })
-
-backgroundPort.onMessage.addListener(({ cmd, data }) => {
-  if (cmd === 'end') {
-    createTable(data)
-
-    chrome.storage.local.set({ data: data }, () => {
-      console.log('Información guardada en el almacenamiento local')
-    })
+function displayData(data) {
+  for (const location in data) {
+    const jobGroup = data[location];
+    jobGroup.forEach(job => {
+      const div = document.createElement("div");
+      div.innerHTML = `<br> <strong>Lugar:</strong> <em>${job.location}</em> <br> Salario: ${job.salary}`;
+      messageElement.appendChild(div);
+    });
   }
-})
-
-// Listeners para los eventos del DOM
-document.addEventListener('DOMContentLoaded', () => {
-  chrome.storage.local.get(['data'], (result) => {
-    if (result.data) {
-      createTable(result.data)
-    }
-  })
-})
-
-btnScriptElement.addEventListener('click', () => {
-  chrome.storage.local.remove('data', () => {
-    console.log('Información eliminada del almacenamiento local')
-    backgroundPort.postMessage({ cmd: 'start' })
-    messageElement.textContent = 'Cargando...'
-  })
-})
-
-btnDeleteElement.addEventListener('click', () => {
-  chrome.storage.local.remove('data', () => {
-    console.log('Información eliminada del almacenamiento local')
-    messageElement.textContent = ''
-  })
-})
+}
